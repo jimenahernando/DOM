@@ -7,7 +7,7 @@ class App{
     inputName = document.querySelector('#name');
     instrument = document.querySelector('#instrument');
     rating = document.querySelector('#rating');
-    table = document.querySelector('table');
+    table = document.querySelector('tbody');
     count = 1;
 
     constructor(){
@@ -54,8 +54,10 @@ class App{
         return td;
     }
 
-    createOperationsTd(){
+    createOperationsTd(id){
+        //creo el td
         const tdOperations = document.createElement('td');
+        
         //agrego la clase que tiene estilos en css
         tdOperations.classList.add('actions');
                     
@@ -64,11 +66,12 @@ class App{
            
         const iEdit = this.createIcon('fa-pencil-alt');
         const iTrash = this.createIcon('fa-trash');
+        iTrash.addEventListener('click', () => this.removeMusician(id));
         tdOperations.append(iEdit, iTrash);
         return tdOperations;
     }
 
-    createMusicianTr({ name, instrument, rating}){
+    createMusicianTr({ id, name, instrument, rating}){
          //creo la fila
          const tr = document.createElement('tr');
             
@@ -76,16 +79,29 @@ class App{
          const trName = this.createTdWithText(name);
          const trInstrument = this.createTdWithText(instrument);
          const trRating = this.createTdWithText(rating);
-         const tdOperations = this.createOperationsTd();
+         const tdOperations = this.createOperationsTd(id);
         
          //para colocar multiples hijos
          tr.append(trName, trInstrument, trRating, tdOperations);
          return tr;
+    }
+
+    removeMusician(id){
+        this.musicians = this.musicians.filter((musician) => musician.id !== id);
+        this.paintMusicians();
+    }
+
+    paintMusicians(){
+        this.table.innerHTML = '';
+        this.musicians.forEach((musician) => {
+            const tr = this.createMusicianTr(musician);
+            this.table.appendChild(tr);
+        });
     }
 }
 
 const app  = new App()
 console.log(app);
 
-const stephane = new Musician(1,'Stephane Gillespie', 'Piano', 5);
-console.log(stephane);
+// const stephane = new Musician(1,'Stephane Gillespie', 'Piano', 5);
+// console.log(stephane);
