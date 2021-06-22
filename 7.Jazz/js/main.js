@@ -3,17 +3,31 @@ import { Musician } from "../classes/Musician.js";
 class App{
     musicians = [];
     
+    //Tomo del HTML
     form = document.querySelector('form');
     inputName = document.querySelector('#name');
     instrument = document.querySelector('#instrument');
     rating = document.querySelector('#rating');
     table = document.querySelector('tbody');
     button = document.querySelector('button');
+    nameCol = document.querySelector('#name-col');
+    instrumentCol = document.querySelector('#instrument-col');
+    ratingCol = document.querySelector('#rating-col');
+    
+    //variables auxiliares
     count = 1;
     currentInd = null;
 
     constructor(){
         this.form.addEventListener('submit', (event) => this.handleSubmit(event));
+        this.nameCol.addEventListener('click', () => this.sortBy('name'));
+        this.instrumentCol.addEventListener('click', () => this.sortBy('instrument'));
+        this.ratingCol.addEventListener('click', () => this.sortBy('rating'));
+    }
+
+    sortBy(param){
+        this.musicians.sort((a,b) => a[param].toLowerCase() < b[param].toLowerCase() ? -1 : 1);
+        this.paintMusicians();
     }
 
     handleSubmit(event){
