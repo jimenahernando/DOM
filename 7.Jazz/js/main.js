@@ -11,31 +11,28 @@ class App{
     count = 1;
 
     constructor(){
+        this.form.addEventListener('submit', (event) => this.handleSubmit(event));
+    }
 
-        this.form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            //destructuring
-            const { name, instrument, rating } = this.getFormValues()
-            const musician = new Musician(this.count++, name, instrument, rating);
-            this.musicians.push(musician);
+    handleSubmit(event){
+        //evita que se recarguela pagina al hacer clic en el boton 
+        event.preventDefault();
+       
+        //obtengo los valores ingresados del formulario
+        //destructuring
+        const { name, instrument, rating } = this.getFormValues()
 
-            //para ponerlo en la tabla
-            console.log(musician);
+        //creo el musician
+        const musician = new Musician(this.count++, name, instrument, rating);
+        
+        //agrego el musician al array
+        this.musicians.push(musician);
 
-            //creo la fila
-            const tr = document.createElement('tr');
-            
-            //creo cada celda
-            const trName = this.createTdWithText(name);
-            const trInstrument = this.createTdWithText(instrument);
-            const trRating = this.createTdWithText(rating);
-            const tdOperations = this.createOperationsTd();
-           
-            //para colocar multiples hijos
-            tr.append(trName, trInstrument, trRating, tdOperations);
-            
-            this.table.appendChild(tr);
-        });
+        //creo el musico
+        const tr = this.createMusicianTr(musician);
+        
+        //agrego el row creado a la tabla
+        this.table.appendChild(tr);
     }
     
     getFormValues(){
@@ -71,6 +68,20 @@ class App{
         return tdOperations;
     }
 
+    createMusicianTr({ name, instrument, rating}){
+         //creo la fila
+         const tr = document.createElement('tr');
+            
+         //creo cada celda
+         const trName = this.createTdWithText(name);
+         const trInstrument = this.createTdWithText(instrument);
+         const trRating = this.createTdWithText(rating);
+         const tdOperations = this.createOperationsTd();
+        
+         //para colocar multiples hijos
+         tr.append(trName, trInstrument, trRating, tdOperations);
+         return tr;
+    }
 }
 
 const app  = new App()
