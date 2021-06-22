@@ -20,9 +20,23 @@ class App{
 
     constructor(){
         this.form.addEventListener('submit', (event) => this.handleSubmit(event));
-        this.nameCol.addEventListener('click', () => this.sortBy('name'));
-        this.instrumentCol.addEventListener('click', () => this.sortBy('instrument'));
-        this.ratingCol.addEventListener('click', () => this.sortBy('rating'));
+        this.nameCol.addEventListener('click', () => this.sortColumn('name', 'nameCol'));
+        this.instrumentCol.addEventListener('click', () => this.sortColumn('instrument', 'instrumentCol'));
+        this.ratingCol.addEventListener('click', () => this.sortColumn('rating', 'ratingCol'));
+    }
+
+    sortColumn(param, element){
+        //parametro de ordenacion
+        //elemento al cual le queremos poner el underline
+        this.sortBy(param);
+        this.removeUnderline();
+        this[element].style.textDecoration = 'underline';
+    }
+
+    removeUnderline(){
+        this.nameCol.style.textDecoration = 'none';
+        this.instrumentCol.style.textDecoration = 'none';
+        this.ratingCol.style.textDecoration = 'none';
     }
 
     sortBy(param){
@@ -127,8 +141,11 @@ class App{
     }
 
     removeMusician(id){
-        this.musicians = this.musicians.filter((musician) => musician.id !== id);
-        this.paintMusicians();
+        const confirmed = confirm(`Are you sure????`);
+        if(confirmed){
+            this.musicians = this.musicians.filter((musician) => musician.id !== id);
+            this.paintMusicians();
+        }
     }
 
     editMusician(id){
