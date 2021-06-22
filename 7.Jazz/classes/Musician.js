@@ -1,8 +1,8 @@
 export class Musician{
-    constructor(name, instrument, rating){
+    constructor(id, name, instrument, rating){
+        this.id = id;
         this.name = name;
         this.instrument = instrument;
         this.rating = rating;
-        this.id = id;
     }
 }

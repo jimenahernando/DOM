@@ -73,10 +73,21 @@
     width: 100%;
     border-radius: var(--radius);
     margin-top: 2rem;
+    overflow: hidden;
   }
+
+    tr:first-child td{
+        background-color: #006f75;
+    }
+
+  tr:nth-child(2) td{
+      border-top: 1px solid var(--primary);
+  }
+
   tr:not(:last-child) td {
     border-bottom: 1px solid var(--primary);
   }
+
   td {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
@@ -103,3 +114,20 @@
     background-color: var(--primary);
     color: var(--bg-dark);
   }
+
+.actions{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40.1px;
+}
+
+.actions i{
+    cursor: pointer;
+    color: var(--primary);
+}
+
+td:last-child{
+    width: 5rem;    
+}
+
