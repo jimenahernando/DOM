@@ -25,6 +25,12 @@ class App{
         //creo el musician
         const musician = new Musician(this.count++, name, instrument, rating);
         
+        //validacion
+        if(!name || !instrument){
+            console.error(`Debe completar los campos`);
+            return;
+        }
+
         //agrego el musician al array
         this.musicians.push(musician);
 
@@ -33,6 +39,11 @@ class App{
         
         //agrego el row creado a la tabla
         this.table.appendChild(tr);
+
+        //para que limpie
+        this.form.reset();
+        //para que tome el foco
+        this.inputName.select();
     }
     
     getFormValues(){
