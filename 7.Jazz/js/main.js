@@ -8,7 +8,9 @@ class App{
     instrument = document.querySelector('#instrument');
     rating = document.querySelector('#rating');
     table = document.querySelector('tbody');
+    button = document.querySelector('button');
     count = 1;
+    currentInd = null;
 
     constructor(){
         this.form.addEventListener('submit', (event) => this.handleSubmit(event));
@@ -21,27 +23,39 @@ class App{
         //obtengo los valores ingresados del formulario
         //destructuring
         const { name, instrument, rating } = this.getFormValues()
-
-        //creo el musician
-        const musician = new Musician(this.count++, name, instrument, rating);
         
         //validacion
         if(!name || !instrument){
             console.error(`Debe completar los campos`);
             return;
         }
-
-        //agrego el musician al array
-        this.musicians.push(musician);
-
-        //creo el musico
-        const tr = this.createMusicianTr(musician);
         
-        //agrego el row creado a la tabla
-        this.table.appendChild(tr);
+        if(this.currentId){
+            const newMusician = new Musician(this.currentId, name, instrument, rating);
+            this.musicians = this.musicians.map((musician) => {
+                return musician.id === this.currentId ? newMusician : musician;
+
+            });
+            this.paintMusicians();
+            this.button.innerText = 'Submit';
+            this.currentId = null;
+        } else {
+            //creo el musician
+            const musician = new Musician(this.count++, name, instrument, rating);
+            
+            //agrego el musician al array
+            this.musicians.push(musician);
+
+            //creo el musico
+            const tr = this.createMusicianTr(musician);
+            
+            //agrego el row creado a la tabla
+            this.table.appendChild(tr);
+        }
 
         //para que limpie
         this.form.reset();
+
         //para que tome el foco
         this.inputName.select();
     }
@@ -78,6 +92,7 @@ class App{
         const iEdit = this.createIcon('fa-pencil-alt');
         const iTrash = this.createIcon('fa-trash');
         iTrash.addEventListener('click', () => this.removeMusician(id));
+        iEdit.addEventListener('click', () => this.editMusician(id));
         tdOperations.append(iEdit, iTrash);
         return tdOperations;
     }
@@ -100,6 +115,17 @@ class App{
     removeMusician(id){
         this.musicians = this.musicians.filter((musician) => musician.id !== id);
         this.paintMusicians();
+    }
+
+    editMusician(id){
+        const musician = this.musicians.find((musician) => musician.id === id);
+        const {name, instrument, rating } = musician;
+        //no comprueba que lo encuentre porque sino no podria haberle hecho clic
+        this.inputName.value = name;
+        this.instrument.value = instrument;
+        this.rating.value = rating;
+        this.currentId = id;
+        this.button.innerText = 'Edit';
     }
 
     paintMusicians(){
