@@ -1,10 +1,10 @@
-:root{
-    --primary: #3d5a80;
-    --primary-alpha: #98c1d9;
-    --secondary: #227c9d;
+:root {
+  --primary: #3d5a80;
+  --primary-alpha: #98c1d9;
+  --secondary: #227c9d;
 }
 
-* { 
+* {
   font-family: Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
@@ -14,70 +14,93 @@
   scroll-behavior: smooth;
 }
 
-body{
-
-    overflow: hidden;
+body {
+  overflow: hidden;
 }
 
-header{
-    height: 4rem;
-    background-color: var(--secondary);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
+header {
+  height: 4rem;
+  background-color: var(--secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
 }
 
-header h3{
-    color: #fff;
-    font-weight: 700;
+header h3 {
+  color: #fff;
+  font-weight: 700;
 }
 
-header button{
-    background-color: var(--primary-alpha);
-    color: #fff;
-    height: 2rem;
-    width: 2rem;
-    border-radius: 100%;
-    border: none;
-    cursor: pointer;
+header button {
+  background-color: var(--primary-alpha);
+  color: #fff;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
 }
 
-ul{
-    list-style: none;
+ul {
+  list-style: none;
 }
 
-header nav ul{
-    display: flex;
-    align-items: center;
-    color: #fff;
+header nav ul {
+  display: flex;
+  align-items: center;
+  color: #fff;
 }
 
-header li{
-    margin-left: 1rem;
+header li {
+  margin-left: 1rem;
 }
 
-main{
-    padding: 2rem;
+main {
+  padding: 2rem;
 }
 
-aside{
-    position: absolute;
-    height: calc(100% - 4rem);
-    background: var(--primary-alpha);
-    right: -250px;
-    width: 250px;
-    padding: 2rem;
-    z-index: 1;
-    color: var(--primary);
+aside {
+  position: absolute;
+  height: calc(100% - 4rem);
+  background: var(--primary-alpha);
+  right: -250px;
+  width: 250px;
+  padding: 2rem;
+  z-index: 1;
+  color: var(--primary);
 }
 
 /* BACKDROP */
-.backdrop{
-    position: absolute;
-    /* tan alto como toda la pagina menos el header */
-    height: calc(100% - 4rem);
-    width: 100vw; 
-    background-color: #0008;
-    display: none;
+.backdrop {
+  position: absolute;
+  /* tan alto como toda la pagina menos el header */
+  height: calc(100% - 4rem);
+  width: 100vw;
+  background-color: #0008;
+  display: none;
+}
+
+.closed aside {
+  right: -250px;
+}
+
+.closed main {
+  margin-right: 0;
+}
+
+.closed .backdrop {
+  display: none;
+}
+
+.open aside {
+  right: 0;
+}
+
+.open main {
+  margin-right: 250px;
+}
+
+.open .backdrop {
+  display: block;
 }
