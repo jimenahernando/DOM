@@ -17,3 +17,40 @@ body {
   color: #ddd;
   background-color: #232323;
 }
+
+input, 
+button{
+  padding: 0.3rem 0.8rem;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #ddd;
+  margin: 1rem;
+}
+
+input{
+  font-size: 1rem;
+}
+
+input:focus{
+  box-shadow: 0 0 0 3px #311280;
+}
+
+button{
+  border-radius: 100px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #311280;
+}
+
+button:focus{
+  background-color: orange;
+}
+
+ul li{
+  line-height: 2rem;
+}
