@@ -59,35 +59,46 @@ class App{
         }
         
         if(this.currentId){
+            //creo el musician
             const newMusician = new Musician(this.currentId, name, instrument, rating);
-            this.musicians = this.musicians.map((musician) => {
-                return musician.id === this.currentId ? newMusician : musician;
-
-            });
-            this.paintMusicians();
-            this.button.innerText = 'Submit';
-            this.currentId = null;
+            
+            //edito el musico
+            this.updateMusician(newMusician);
+        
         } else {
             //creo el musician
             const musician = new Musician(this.count++, name, instrument, rating);
             
             //agrego el musician al array
-            this.musicians.push(musician);
-
-            //creo el musico
-            const tr = this.createMusicianTr(musician);
-            
-            //agrego el row creado a la tabla
-            this.table.appendChild(tr);
+            this.addMusician(musician);
         }
 
         //para que limpie
         this.form.reset();
 
-        //para que tome el foco
+        //para que tome el foco el primer input
         this.inputName.select();
     }
     
+    addMusician(musician) {
+        this.musicians.push(musician);
+
+        //creo el musico
+        const tr = this.createMusicianTr(musician);
+
+        //agrego el row creado a la tabla
+        this.table.appendChild(tr);
+    }
+
+    updateMusician(newMusician) {
+        this.musicians = this.musicians.map((musician) => {
+            return musician.id === this.currentId ? newMusician : musician;
+        });
+        this.paintMusicians();
+        this.button.innerText = 'Submit';
+        this.currentId = null;
+    }
+
     getFormValues(){
         const name = this.inputName.value;
         const instrument = this.instrument.value;
@@ -113,7 +124,12 @@ class App{
         
         //agrego la clase que tiene estilos en css
         tdOperations.classList.add('actions');
-                    
+        const { iEdit, iTrash } = this.createOperationsIcons(id);
+        tdOperations.append(iEdit, iTrash);
+        return tdOperations;
+    }
+
+    createOperationsIcons(id) {
         //iconos
         // trOperations.innerHTML = '<button><i class="far fa-edit"></i></button><button><i class="far fa-trash-alt"></i></button>'
            
@@ -121,8 +137,7 @@ class App{
         const iTrash = this.createIcon('fa-trash');
         iTrash.addEventListener('click', () => this.removeMusician(id));
         iEdit.addEventListener('click', () => this.editMusician(id));
-        tdOperations.append(iEdit, iTrash);
-        return tdOperations;
+        return { iEdit, iTrash };
     }
 
     createMusicianTr({ id, name, instrument, rating}){
@@ -130,14 +145,20 @@ class App{
          const tr = document.createElement('tr');
             
          //creo cada celda
-         const trName = this.createTdWithText(name);
-         const trInstrument = this.createTdWithText(instrument);
-         const trRating = this.createTdWithText(rating);
-         const tdOperations = this.createOperationsTd(id);
+         const tds = this.createMusicianTds(name, instrument, rating, id);
+         const { tdName, tdInstrument, tdRating, tdOperations } = tds;
         
          //para colocar multiples hijos
-         tr.append(trName, trInstrument, trRating, tdOperations);
+         tr.append(tdName, tdInstrument, tdRating, tdOperations);
          return tr;
+    }
+
+    createMusicianTds(name, instrument, rating, id) {
+        const tdName = this.createTdWithText(name);
+        const tdInstrument = this.createTdWithText(instrument);
+        const tdRating = this.createTdWithText(rating);
+        const tdOperations = this.createOperationsTd(id);
+        return { tdName, tdInstrument, tdRating, tdOperations };
     }
 
     removeMusician(id){
