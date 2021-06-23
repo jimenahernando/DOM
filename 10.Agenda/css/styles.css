@@ -1,0 +1,147 @@
+* {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  :root {
+    --primary: #892b64;
+    --primary-alpha: #892b6420;
+    --bg-dark: #000b1f;
+    --accent: #cecece;
+    --radius: 0.1rem;
+    font-size: 20px;
+  }
+  body {
+    background-color: var(--bg-dark);
+    background-image: url(https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBob25lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-blend-mode: darken;
+    color: var(--accent);
+    font-weight: 300;
+    padding: 3rem;
+  }
+  header {
+    height: 4rem;
+    padding: 0rem 3rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-dark);
+  }
+
+  form {
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  select option {
+    background-color: var(--bg-dark);
+  }
+  label {
+    font-size: 0.75rem;
+  }
+  input,
+  select {
+    display: block;
+    margin-top: 0.5rem;
+    background-color: transparent;
+    font-size: inherit;
+    color: var(--accent);
+    width: 100%;
+    border: 1px solid var(--primary);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    outline: none;
+  }
+  input:focus,
+  select:focus {
+    background-color: var(--primary-alpha);
+  }
+  table {
+    border-spacing: 0px;
+    border: 1px solid var(--primary);
+    width: 100%;
+    border-radius: var(--radius);
+    margin-top: 2rem;
+    overflow: hidden;
+  }
+  
+  thead td:not(:last-child) {
+    color: var(--primary);
+    cursor: pointer;
+  }
+  
+  thead td:not(:last-child):hover {
+    color: #fff;
+  }
+  
+  thead tr:first-child td {
+    background-color: #892b6420;
+  }
+  
+  tbody tr:first-child td {
+    border-top: 1px solid var(--primary);
+  }
+  
+  tr:not(:last-child) td {
+    border-bottom: 1px solid var(--primary);
+  }
+  
+  td {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  td:not(:last-child) {
+    border-right: 1px solid var(--primary);
+  }
+  button {
+    grid-column: -2;
+    align-self: flex-end;
+    padding: 0.5rem;
+    font-size: inherit;
+    border-radius: var(--radius);
+    background-color: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: var(--primary-alpha);
+  }
+  button:active {
+    background-color: var(--primary);
+    color: var(--bg-dark);
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40.1px;
+  }
+  
+  .actions i {
+    cursor: pointer;
+    color: var(--primary);
+  }
+
+  
+  .actions i:hover {
+    color: #ddd;
+  }
+  
+  td:last-child {
+    width: 5rem;
+  }
+  
