@@ -1,0 +1,91 @@
+* { 
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+:root{
+    font-size: 22px;
+    --primary: #007797;
+}
+
+header{
+    background-color: var(--primary);
+    color: #fff;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 0 8vw;
+}
+
+main{
+    padding: 2rem 8vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+form{
+    /* 8% de la ventana */
+    padding: 2rem 8vw 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 2rem;
+    row-gap: 1rem;
+}
+
+form button {
+    grid-column: -2;
+}
+
+input, 
+button{
+    padding: 0.3rem 0.5rem;
+    font-size: 18px;
+    border: 1px solid var(--primary);
+    background-color: transparent;
+    outline: none;
+}
+
+button{
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+.card{
+    border: 0.5px solid var(--primary);
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+.card h3{
+    color: var(--primary);
+    padding: 0.5rem 0;
+}
+
+.card img{
+    width: 100%;
+    border-radius: 0.25rem;
+    /* para indicar el tamano en ves d eponerlo en div */
+    object-fit: cover;
+    height: 9rem;
+}
+
+.card button{
+
+    margin-top: 1rem;
+    padding: 0.3rem 1rem;
+}
+
+button:hover{
+    filter: brightness(1.2);
+}
+
+.card p{
+    line-height: 1.25rem;
+}
