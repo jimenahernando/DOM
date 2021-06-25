@@ -1,6 +1,7 @@
 export class Destination{
     card = document.createElement('div');
     deleteButton = document.createElement('button');
+    editButton = document.createElement('button');
     
     constructor(id, destName, place, img, type, rating){
         this.id = id;
@@ -10,6 +11,7 @@ export class Destination{
         this.type = type;
         this.rating = rating;
         this.createCard();
+        this.createEditButton();
         this.createDeleteButton();
     }
 
@@ -23,12 +25,15 @@ export class Destination{
         place.innerText = this.place;
         const type = document.createElement('p');
         type.innerText = this.type;
-        this.createDeleteButton();
-        this.card.append(h3, img, place, type, this.deleteButton);
+        this.card.append(h3, img, place, type, this.editButton, this.deleteButton);
     }
 
     createDeleteButton(){
         this.deleteButton.innerText = 'Delete';
+    }
+    createEditButton(){
+        this.editButton.innerText = 'Edit';
+        this.editButton.style.marginRight = '0.5rem';
     }
 
 }
