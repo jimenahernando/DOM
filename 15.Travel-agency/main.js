@@ -13,11 +13,11 @@ class App{
         this.form.addEventListener('submit', (event) => this.handleSubmit(event));
     }
 
-    getData(){
-        //para que se conecte a la appi
-        fetch('https://api-coches.herokuapp.com/travels/')
-        .then(res => res.json())
-        .then((json) => { 
+    async getData(){
+        try{
+            //para que se conecte a la appi
+            const res = await fetch('https://api-coches.herokuapp.com/travels/');
+            const json = await res.json(); 
             this.destinations = json.map((dest) => {
                 const destination = new Destination(dest.id, dest.name, dest.destination, dest.img , dest.type, dest.rating)
                 destination.deleteButton.addEventListener('click', () => this.removeDestination(destination.id));
@@ -26,8 +26,9 @@ class App{
             });
             // console.log(this.destinations);
             this.paintDestinations(this.destinations);
-        })
-        .catch((()=> console.log(`Something went wrong`)));
+        } catch(error) {
+            console.log(`Something went wrong`);
+        }
     }
 
     paintDestinations(array){
@@ -35,19 +36,20 @@ class App{
         array.forEach((destination) => this.main.appendChild(destination.card));
     }
 
-    removeDestination(id){
-        //para borrar un elemento del api
-        fetch(`https://api-coches.herokuapp.com/travels/${id}`, {
-            method: 'DELETE'
-        })
-        .then(res => {
+    async removeDestination(id){
+        try{
+            //para borrar un elemento del api
+            const res = fetch(`https://api-coches.herokuapp.com/travels/${id}`, {
+                method: 'DELETE'
+            })
             if(res.ok){
                 this.getData()
             } else {
                 alert('Something went wrong..');
             }        
-        })
-        .catch((()=> console.log(`Something went wrong`)));
+        } catch (error) {
+            console.log(`Something went wrong`);
+        }
     }
 
     handleSubmit(event){
@@ -69,46 +71,49 @@ class App{
 
     }
 
-    addDestination(newDestination){
-        fetch('https://api-coches.herokuapp.com/travels/', {
-            method: 'POST',
-            body: JSON.stringify(newDestination),
-            headers: {
-                'Content-Type' : 'application/json',
-            }
-        })
+    async addDestination(newDestination){
+        try{
+            const res = await fetch('https://api-coches.herokuapp.com/travels/', {
+                method: 'POST',
+                body: JSON.stringify(newDestination),
+                headers: {
+                    'Content-Type' : 'application/json',
+                }
+            })
         // .then(console.log);
-        .then(res => {
+        
             if(res.ok){
                 this.getData();
             } else {
                 alert ('Something went wrong');
             }
-        })
-        .catch((()=> console.log(`Something went wrong`)));
+        } catch (error){
+            console.log(`Something went wrong`);
+        }
+
     }
 
-    updateDestination(newDestination){
-        fetch(`https://api-coches.herokuapp.com/travels/${this.currentId}`, {
-            method: 'PUT',
-            body: JSON.stringify(newDestination),
-            headers: {
-                'Content-Type' : 'application/json',
-            }
-        })
-        .then(res => {
+    async updateDestination(newDestination){
+        try{
+            const res = await fetch(`https://api-coches.herokuapp.com/travels/${this.currentId}`, {
+                method: 'PUT',
+                body: JSON.stringify(newDestination),
+                headers: {
+                    'Content-Type' : 'application/json',
+                }
+            });
+            
             if(res.ok){
                 this.getData();
             } else {
                 alert ('Something went wrong');
             }
-        })
-        .catch((()=> console.log(`Something went wrong`)))
-        .finally(() => {
-            this.currentId = null;
-            this.form.reset();
-            this.button.innerText = 'Save';
-        });
+        } catch(error){
+            console.log(`Something went wrong`);
+        }
+        this.currentId = null;
+        this.form.reset();
+        this.button.innerText = 'Save';
     }
 
     editDestination(destination){
