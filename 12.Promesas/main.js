@@ -11,7 +11,7 @@ const getData = () => {
             console.log(`FILTRAR LOS DATOS`)
             console.log(`DEVOLVER DATOS AL USUARIO`)
             console.log(`PINTAR EN LA PAGINA`)
-            resolve();
+            resolve(`END`);
         } else {
             reject(new Error('Something went wrong'));
         }
@@ -20,7 +20,7 @@ const getData = () => {
 }
 
 getData()
-    .then(() => console.log(`END`))
+    .then((res) => console.log(res))
     .catch((error) => console.log(error))
     .finally(() => console.log(`BYEBYE`));
 
