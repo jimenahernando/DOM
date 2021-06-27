@@ -1,0 +1,60 @@
+* { 
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+:root{
+    font-size: 20px;
+}
+
+header{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0 8vw;
+}
+
+header h3{
+    padding: 0 0.5rem;
+    flex-grow: 1;
+}
+
+button{
+    margin-left: -6.5px;
+    border-radius: 0 0.25rem 0.25rem 0;
+    cursor: pointer;
+}
+
+input{
+    border-radius: 0.25rem 0 0 0.25rem;
+    outline: none;
+}
+
+input,
+button{
+    padding: 0.3rem 0.5rem;
+    border: 2.5px solid #ddd;
+}
+
+input:focus,
+button:hover{
+    border-color: #999;
+}
+
+header i{
+    font-size: 2rem;
+}
+
+.card{
+    border: 0.5px solid #ddd;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 11px 1px #0002;
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
